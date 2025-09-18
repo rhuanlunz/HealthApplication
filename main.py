@@ -3,11 +3,12 @@ from services.validators import *
 
 def main():
     patient = {
-        "Name:": validate_name(input("Insira seu nome: ")),
-        "Age:": input("Insira seu idade: "),
-        "Height:": input("Insira sua altura: "),
+        "Name:": validate_name(),
+        "Age:": validate_age(),
+        "Height:": validate_height(),
         "Weight:": input("Insira o seu peso: "),
         "Biologic Gender:": input("Insira o seu genero biologico: ")
     }
 
-main()
+if __name__ == "__main__":
+    main()
