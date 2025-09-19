@@ -1,3 +1,6 @@
 # Ignorar arquivos compilados Python
 *.pyc
 __pycache__/
+
+README.md
+
