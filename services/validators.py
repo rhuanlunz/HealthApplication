@@ -1,5 +1,4 @@
 import re
-from services.menus import *
 
 ## Patient infos validations
 
@@ -99,4 +98,3 @@ def validate_menu_option(options):
             continue
 
         return option
-    

@@ -1,6 +1,7 @@
 from services.validators import *
 from services.patient import *
-from utils.console import *
+from utils.console_utils import *
+from utils.functions_utils import *
 
 def show_menu():
     print("- Menu Principal - ")
@@ -15,10 +16,14 @@ def show_menu():
   
     match option:
         case 1: 
-            clear_console()
-            print("- Cadastro de Pacientes - ")
-            cad_patient()
-            print(DATABASE)
+            loop = True
+            while loop:
+                clear_console()
+                print("- Cadastro de Pacientes - ")
+                cad_patient()
+                clear_console()
+                print(DATABASE) #debnug apenas
+                loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
         case 2:
             # Listar Pacientes
             pass
@@ -27,4 +32,3 @@ def show_menu():
             pass
         case 4:
             exit()    
-    
