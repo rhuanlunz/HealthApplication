@@ -22,11 +22,10 @@ def show_menu():
                 print("- Cadastro de Pacientes - ")
                 cad_patient()
                 clear_console()
-                print(DATABASE) #debnug apenas
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
+            show_menu()
         case 2:
-            # Listar Pacientes
-            pass
+            list_all_patients()
         case 3:
             #Remover Pacientes
             pass
