@@ -53,7 +53,7 @@ def validate_height():
             continue
 
         if not (MIN <= height <= MAX):
-            print(f"O seu peso nao pode ser menor que {MIN}cm ou maior que {MAX}cm.")
+            print(f"A sua idade nao pode ser menor que {MIN}cm ou maior que {MAX}cm.")
             continue 
 
         return height   

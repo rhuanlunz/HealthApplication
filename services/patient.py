@@ -1,5 +1,6 @@
 from services.validators import *
 from database import *
+from services.calcules import *
 
 def cad_patient():
     patient = {
@@ -8,37 +9,27 @@ def cad_patient():
             "Height": validate_height(),
             "Weight": validate_weight(),
             "Biologic Gender": validate_biologic_gender(),
-            "IMC": calculate_imc(patient),
-            "BMR": calculate_bmr(),                           #DESCOBRIR MANEIRA DE ADICIONAR OS CALCULOS NO PACIENTE.
-            "Classification": classificate_patient()
         }
+    
+    patient["IMC"] = calculate_imc(patient)
+    patient["BMR"] = calculate_bmr(patient)
+    patient["Classification"] = classificate_patient(patient)
+
     print("Usuario Cadastrado!")
     return DATABASE.append(patient)
 
 def list_all_patients():
     for patient in DATABASE:
                     print(f"Paciente numero {DATABASE.index(patient)}")
-                    print("NOME:" + patient["Name"])
-                    print("IDADE:" + patient["Age"])
-                    print("ALTURA:" + patient["Height"])
-                    print("PESO:" + patient["Weight"])
-                    print("GENERO BIOLOGICO:" + patient["Biologic_gender"])
+                    print(f"NOME: {patient['Name']}")
+                    print(f"IDADE:{patient['Age']}")
+                    print(f"ALTURA:{patient['Height']}")
+                    print(f"PESO:{patient['Weight']}")
+                    print(f"GENERO BIOLOGICO:{patient['Biologic Gender']}")
 
 def list_especific_patient():
     #listar paciente baseado no indice nome ou etc.n sei
     pass
 
-
-
-
-
-#Remove that file, put on in a new file for more modularization.                    
-def calculate_imc(patient):
-    IMC =  patient["Weight"] / (patient["Height"] * patient["Height"])
-    print(IMC)
-
-def calculate_bmr():
-    pass
-
-def classificate_patient():
+def classificate_patient(patient):
     pass
