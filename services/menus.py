@@ -4,6 +4,7 @@ from utils.console_utils import *
 from utils.functions_utils import *
 
 def show_menu():
+    clear_console()
     print("- Menu Principal - ")
     print("1 - Cadastras Paciente")
     print("2 - Listar Pacientes")
@@ -17,24 +18,21 @@ def show_menu():
         case 1: 
             loop = True
             while loop:
-                clear_console()
                 print("- Cadastro de Pacientes - ")
                 cad_patient()
-                clear_console()
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
-            show_menu()
+                show_menu()
         case 2:
             loop = True
             while loop:
-                clear_console()
                 print("- Listagem de Pacientes - ")
                 option = list_patients_menu() 
                 if option == 1:
-                    list_all_patients()             ##Arrumar o Return dos pacientes listando, ta feio e errado.
+                    list_all_patients()
                 else: 
                     list_especific_patient()
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
-            show_menu()
+                show_menu()
         case 3:
             #Remover Pacientes
             pass
@@ -42,6 +40,7 @@ def show_menu():
             exit()    
 
 def list_patients_menu():
+    clear_console()
     print("Como voce deseja listar os paciente?")
     print("1 - Listar todos os pacientes.")
     print("2 - Listar paciente especifico.")

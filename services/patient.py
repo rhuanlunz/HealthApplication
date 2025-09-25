@@ -1,8 +1,10 @@
 from services.validators import *
 from database import *
 from services.calcules import *
+from utils.console_utils import *
 
 def cad_patient():
+    clear_console()
     patient = {
             "Name": validate_name(),
             "Age": validate_age(),
@@ -19,13 +21,15 @@ def cad_patient():
     return DATABASE.append(patient)
 
 def list_all_patients():
+    clear_console()
     for patient in DATABASE:
-                    print(f"Paciente numero {DATABASE.index(patient)}")
+                    print(f"--- Paciente numero {DATABASE.index(patient)} --")
                     print(f"NOME: {patient['Name']}")
                     print(f"IDADE:{patient['Age']}")
                     print(f"ALTURA:{patient['Height']}")
                     print(f"PESO:{patient['Weight']}")
                     print(f"GENERO BIOLOGICO:{patient['Biologic Gender']}")
+                    print("-------------------------------------------------")
 
 def list_especific_patient():
     #listar paciente baseado no indice nome ou etc.n sei
@@ -33,3 +37,5 @@ def list_especific_patient():
 
 def classificate_patient(patient):
     pass
+
+##ta ficando na memoria quando da um input errado e cancela o programa.
