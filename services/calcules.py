@@ -1,12 +1,13 @@
 def calculate_imc(patient):
-    IMC =  patient["Weight"] / (patient["Height"] * patient["Height"])
-    return IMC
+    height_meter = patient["Height"] / 100  
+    
+    IMC = patient["Weight"] / (height_meter ** 2)
+    return round(IMC, 2)
 
 def calculate_bmr(patient):
     if patient["Biologic Gender"] == "M":
-        BMR = (10 * patient["Weight"]) + (6.25 * patient["Weight"]) -(5 * patient["Age"]) + 5
+        BMR = (10 * patient["Weight"]) + (6.25 * patient["Height"]) - (5 * patient["Age"]) + 5
     else:
-        BMR = (10 * patient["Weight"]) + (6.25 * patient["Weight"]) -(5 * patient["Age"]) - 161
+        BMR = (10 * patient["Weight"]) + (6.25 * patient["Height"]) - (5 * patient["Age"]) - 161
 
-    return BMR
-
+    return round(BMR, 2)

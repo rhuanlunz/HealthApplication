@@ -21,7 +21,7 @@ def show_menu():
                 print("- Cadastro de Pacientes - ")
                 cad_patient()
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
-                show_menu()
+            show_menu()
         case 2:
             loop = True
             while loop:
@@ -29,12 +29,14 @@ def show_menu():
                 option = list_patients_menu() 
                 if option == 1:
                     list_all_patients()
-                else: 
+                elif option == 2:
+                    list_all_patient_simplificate()
+                else:
                     list_especific_patient()
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
-                show_menu()
+            show_menu()
         case 3:
-            #Remover Pacientes
+            #EXCLUIR
             pass
         case 4:
             exit()    
@@ -43,9 +45,12 @@ def list_patients_menu():
     clear_console()
     print("Como voce deseja listar os paciente?")
     print("1 - Listar todos os pacientes.")
+    print("2 - Listar todos os pacientes(SIMPLIFICADO).")
     print("2 - Listar paciente especifico.")
+    
 
-    options = [1, 2]
+    options = [1, 2, 3]
     option = validate_menu_option(options)
 
     return option
+
