@@ -3,6 +3,7 @@ from database import *
 from services.calcules import *
 from utils.console_utils import *
 from utils.functions_utils import *
+import database
 
 def cad_patient():
     clear_console()
@@ -18,6 +19,8 @@ def cad_patient():
     patient["IMC"] = calculate_imc(patient)
     patient["BMR"] = calculate_bmr(patient)
     patient["Classification"] = classificate_patient(patient)
+
+    database.NEXT_ID += 1
 
     print(f"Usuario Cadastrado com sucesso no ID {patient["ID"]}")
     return DATABASE.append(patient)
@@ -62,6 +65,11 @@ def classificate_patient(patient):
     else:
         return "Obesidade grau III"
 
-def delete_patient_by_id():
-    ##Delete patient
-    pass
+def remove_patient_by_id():
+    patient_id = validate_existing_patient(DATABASE)
+
+    for patient in DATABASE:
+        if patient["ID"] == patient_id:
+            DATABASE.remove(patient)
+    
+    print(f"O Paciente {patient['Name']} com o ID: {patient['ID']} foi removido com sucesso!!")

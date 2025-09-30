@@ -1,4 +1,5 @@
 import re
+from database import DATABASE
 
 ## Patient infos validations
 
@@ -98,3 +99,17 @@ def validate_menu_option(options):
             continue
 
         return option
+    
+def validate_existing_patient(DATABASE):
+    while True:
+        try:
+            patient_id = int(input("Insira o ID do Paciente: "))
+        except ValueError:
+            print("Insira um ID valido.")
+            continue
+
+        for patient in DATABASE:
+            if patient["ID"] == patient_id:
+                return patient_id
+            
+        print("Usuario não encontrado, tente novamente.")

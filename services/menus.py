@@ -36,8 +36,12 @@ def show_menu():
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
             show_menu()
         case 3:
-            #EXCLUIR
-            pass
+            loop = True
+            while loop:
+                print("- Remover Pacientes - ")
+                remove_patient_by_id()
+                loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
+            show_menu()
         case 4:
             exit()    
 
