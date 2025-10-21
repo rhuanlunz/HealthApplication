@@ -3,51 +3,29 @@ from database import *
 from services.calcules import *
 from utils.console_utils import *
 from utils.functions_utils import *
-import database
 
 def cad_patient():
     clear_console()
     patient = {
-            "ID": len(DATABASE) + 1,
             "Name": handle_name(),
             "Birthdate": handle_birthdate(),
             "Height": handle_height(),
             "Weight": handle_weight(),
             "Biologic Gender": handle_biologic_gender(),
         }
-    
     patient["IMC"] = calculate_imc(patient)
     patient["BMR"] = calculate_bmr(patient)
     patient["Classification"] = classificate_patient(patient)
-
-    database.NEW_ID += 1
-
-    print(f"Usuario Cadastrado com sucesso no ID {patient["ID"]}")
-    return DATABASE.append(patient)
-
+    register_patient(patient)
+    
 def list_all_patients():
-    clear_console()
-    for patient in DATABASE:
-        print(f"--- Paciente ID {patient["ID"]} --")
-        print(f"NOME: {patient['Name']}")
-        print(f"DATA DE NASCIMENTO:{patient['Birthdate']}")
-        print(f"ALTURA:{patient['Height']}")
-        print(f"PESO:{patient['Weight']}")
-        print(f"GENERO BIOLOGICO:{patient['Biologic Gender']}")
-        print(f"IMC:{patient['IMC']}")
-        print(f"TMB:{patient['BMR']}")
-        print(f"CLASSIFICACAO:{patient['Classification']}")
-        print("-----------------------------------")
+    print(select_all_patients())
 
 def list_all_patient_simplificate():
-    clear_console()
-    for patient in DATABASE:
-        print(f"--- Paciente ID {patient["ID"]} --")
-        print(f"NOME: {patient['Name']}")
-        print("-----------------------------------")
+    print(select_all_patients_simplificate())
 
 def list_especific_patient():
-    print("espeficio")
+    print(select_patient_by_id(handle_patient_id()))
 
 def classificate_patient(patient):
     imc = patient["IMC"]
@@ -66,10 +44,4 @@ def classificate_patient(patient):
         return "Obesidade grau III"
 
 def delete_patient_by_id():
-    patient_id = handle_existing_patient(DATABASE)
-
-    for patient in DATABASE:
-        if patient["ID"] == patient_id:
-            DATABASE.remove(patient)
-    
-    print(f"O Paciente {patient['Name']} com o ID: {patient['ID']} foi removido com sucesso!!")
+    delete_patient(handle_patient_id())

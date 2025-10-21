@@ -31,8 +31,10 @@ def show_menu():
                     list_all_patients()
                 elif option == 2:
                     list_all_patient_simplificate()
-                else:
+                elif option == 3:
                     list_especific_patient()
+                elif option == 4:
+                    show_menu()
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
             show_menu()
         case 3:
@@ -50,9 +52,10 @@ def list_patients_menu():
     print("Como voce deseja listar os paciente?")
     print("1 - Listar todos os pacientes.")
     print("2 - Listar todos os pacientes(SIMPLIFICADO).")
-    print("2 - Listar paciente especifico.")
+    print("3 - Listar paciente especifico.")
+    print("4 - Voltar ao menu principal.")
     
-    options = [1, 2, 3]
+    options = [1, 2, 3, 4]
     option = handle_menu_option(options)
 
     return option

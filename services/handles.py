@@ -1,5 +1,4 @@
 import re
-from database import DATABASE
 from datetime import datetime, timedelta
 
 def handle_name():
@@ -103,16 +102,11 @@ def handle_menu_option(options):
 
         return option
     
-def handle_existing_patient(DATABASE):
+def handle_patient_id():
     while True:
         try:
             patient_id = int(input("Insira o ID do Paciente: "))
         except ValueError:
             print("Insira um ID valido.")
             continue
-
-        for patient in DATABASE:
-            if patient["ID"] == patient_id:
-                return patient_id
-            
-        print("Usuario não encontrado, tente novamente.")
+        return patient_id
