@@ -1,9 +1,8 @@
 import re
 from database import DATABASE
+from datetime import datetime, timedelta
 
-## Patient infos validations
-
-def validate_name():
+def handle_name():
     MIN: int = 2 
     MAX: int = 50
     DEFAULT = r'^[A-Za-zÀ-ÖØ-öø-ÿ\s\-]+$'
@@ -21,28 +20,32 @@ def validate_name():
             continue
         
         return name
-    
-def validate_age():
-    MIN: int = 18
-    MAX: int = 105
+        
+def handle_birthdate():
+    TODAY = datetime.now()
+    MIN_AGE = 18
+    MAX_AGE = 120
+    MAX_DATE = TODAY - timedelta(days=MIN_AGE * 365)
+    MIN_DATE = TODAY - timedelta(days=MAX_AGE * 365)
 
     while True:
-        try:
-            age: int = int(input("Insira a idade: "))
+        try :
+            birthdate = datetime.strptime(input("Insira sua data de nascimento(DD/MM/AA): ").strip(), "%d/%m/%Y")
         except ValueError:
-            print("A idade nao pode conter letras.")
+            print("Insira uma data válida no formato DD/MM/AAAA")
             continue
 
-        if not (age > 0):
-            print("A idade deve ser positiva.")
+        if not (birthdate < TODAY) :
+            print("A data de nascimento não pode ser no futuro.")
             continue
-        if not (MIN <= age <= MAX):
-            print(f"A sua idade nao pode ser menor que {MIN} anos ou maior que {MAX} anos.")
+
+        if not (MIN_DATE <= birthdate <= MAX_DATE) :
+            print("O paciente deve ter idade entre 18 e 120 anos.")
             continue
         
-        return age
-    
-def validate_height():
+        return birthdate
+
+def handle_height():
     MIN: int = 60
     MAX: int = 220
 
@@ -59,7 +62,7 @@ def validate_height():
 
         return height   
     
-def validate_weight():
+def handle_weight():
     MIN: float = 20
     MAX: float = 360
 
@@ -75,7 +78,7 @@ def validate_weight():
 
         return weight
 
-def validate_biologic_gender():
+def handle_biologic_gender():
     while True:
         biologic_gender = input("Insira seu genero biologico(F/M): ").strip().upper()
         if biologic_gender not in ("F", "M"):
@@ -86,7 +89,7 @@ def validate_biologic_gender():
 
 ## Menu Validation
 
-def validate_menu_option(options):
+def handle_menu_option(options):
     while True:
         try:
             option = int(input("Insira uma opcao: "))
@@ -100,7 +103,7 @@ def validate_menu_option(options):
 
         return option
     
-def validate_existing_patient(DATABASE):
+def handle_existing_patient(DATABASE):
     while True:
         try:
             patient_id = int(input("Insira o ID do Paciente: "))

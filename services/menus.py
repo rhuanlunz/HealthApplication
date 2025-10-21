@@ -1,4 +1,4 @@
-from services.validators import *
+from services.handles import *
 from services.patient import *
 from utils.console_utils import *
 from utils.functions_utils import *
@@ -6,13 +6,13 @@ from utils.functions_utils import *
 def show_menu():
     clear_console()
     print("- Menu Principal - ")
-    print("1 - Cadastras Paciente")
+    print("1 - Cadastrar Paciente")
     print("2 - Listar Pacientes")
     print("3 - Remover Pacientes")
     print("4 - Sair")
 
     options = [1,2,3,4]
-    option = validate_menu_option(options) 
+    option = handle_menu_option(options) 
   
     match option:
         case 1: 
@@ -39,7 +39,7 @@ def show_menu():
             loop = True
             while loop:
                 print("- Remover Pacientes - ")
-                remove_patient_by_id()
+                delete_patient_by_id()
                 loop = return_true_false("Deseja continuar(1 - Sim / 2 - Nao): ")
             show_menu()
         case 4:
@@ -52,9 +52,8 @@ def list_patients_menu():
     print("2 - Listar todos os pacientes(SIMPLIFICADO).")
     print("2 - Listar paciente especifico.")
     
-
     options = [1, 2, 3]
-    option = validate_menu_option(options)
+    option = handle_menu_option(options)
 
     return option
 

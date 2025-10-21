@@ -1,4 +1,4 @@
-from services.validators import *
+from services.handles import *
 from database import *
 from services.calcules import *
 from utils.console_utils import *
@@ -9,18 +9,18 @@ def cad_patient():
     clear_console()
     patient = {
             "ID": len(DATABASE) + 1,
-            "Name": validate_name(),
-            "Age": validate_age(),
-            "Height": validate_height(),
-            "Weight": validate_weight(),
-            "Biologic Gender": validate_biologic_gender(),
+            "Name": handle_name(),
+            "Birthdate": handle_birthdate(),
+            "Height": handle_height(),
+            "Weight": handle_weight(),
+            "Biologic Gender": handle_biologic_gender(),
         }
     
     patient["IMC"] = calculate_imc(patient)
     patient["BMR"] = calculate_bmr(patient)
     patient["Classification"] = classificate_patient(patient)
 
-    database.NEXT_ID += 1
+    database.NEW_ID += 1
 
     print(f"Usuario Cadastrado com sucesso no ID {patient["ID"]}")
     return DATABASE.append(patient)
@@ -30,13 +30,13 @@ def list_all_patients():
     for patient in DATABASE:
         print(f"--- Paciente ID {patient["ID"]} --")
         print(f"NOME: {patient['Name']}")
-        print(f"IDADE:{patient['Age']}")
+        print(f"DATA DE NASCIMENTO:{patient['Birthdate']}")
         print(f"ALTURA:{patient['Height']}")
         print(f"PESO:{patient['Weight']}")
         print(f"GENERO BIOLOGICO:{patient['Biologic Gender']}")
         print(f"IMC:{patient['IMC']}")
         print(f"TMB:{patient['BMR']}")
-        print(f"Classificacao:{patient['Classification']}")
+        print(f"CLASSIFICACAO:{patient['Classification']}")
         print("-----------------------------------")
 
 def list_all_patient_simplificate():
@@ -65,8 +65,8 @@ def classificate_patient(patient):
     else:
         return "Obesidade grau III"
 
-def remove_patient_by_id():
-    patient_id = validate_existing_patient(DATABASE)
+def delete_patient_by_id():
+    patient_id = handle_existing_patient(DATABASE)
 
     for patient in DATABASE:
         if patient["ID"] == patient_id:
