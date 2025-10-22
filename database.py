@@ -1,5 +1,7 @@
 import sqlite3 as sq
 
+from models.Patient import Patient
+
 DB_PATH = 'DATABASE.db'
 
 def init_database():
@@ -19,7 +21,7 @@ def init_database():
                 )
             ''')
 
-def register_patient(patient):
+def register_patient(patient: Patient):
     with sq.connect(DB_PATH) as CONNECT:
         CURSOR = CONNECT.cursor()
         CURSOR.execute('''
@@ -29,7 +31,7 @@ def register_patient(patient):
                 VALUES
                        (?, ?, ?, ?, ?, ?, ?, ?)
         ''',
-            (patient["Name"], patient["Birthdate"], patient["Height"], patient["Weight"], patient["Biologic Gender"],patient["IMC"], patient["BMR"], patient["Classification"] )
+            (patient.name, patient.birthdate, patient.height, patient.weight, patient.biologic_gender, patient.imc, patient.bmr, patient.classification)
         )
 
 def select_all_patients():

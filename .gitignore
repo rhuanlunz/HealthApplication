@@ -1,3 +1,6 @@
+# Ignorar arquivos de configuração do vscode
+.vscode/
+
 # Ignorar arquivos compilados Python
 *.pyc
 __pycache__/
