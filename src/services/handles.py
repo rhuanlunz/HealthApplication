@@ -87,7 +87,6 @@ def handle_biologic_gender():
         return biologic_gender    
 
 ## Menu Validation
-
 def handle_menu_option(options):
     while True:
         try:

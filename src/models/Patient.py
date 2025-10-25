@@ -1,9 +1,8 @@
 from datetime import datetime
-
 from services.calcules import calculate_bmr, calculate_imc
 
 class Patient:
-    def __init__(self, name = '', birthdate = '01/01/2001', height = 0.0, weight = 0.0, biologic_gender = 'M'):
+    def __init__(self, name, birthdate, height, weight, biologic_gender):
         self.name: str = name
         self.birthdate: datetime = birthdate
         self.height: float = height

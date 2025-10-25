@@ -1,25 +1,6 @@
-import sqlite3 as sq
-
+import _sqlite3 as sq
 from models.Patient import Patient
-
-DB_PATH = 'DATABASE.db'
-
-def init_database():
-    with sq.connect(DB_PATH) as CONNECT:
-        CURSOR = CONNECT.cursor()
-        CURSOR.execute('''
-            CREATE TABLE IF NOT EXISTS PATIENTS(
-                    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    NAME VARCHAR NOT NULL,
-                    BIRTHDATE TEXT NOT NULL,
-                    HEIGHT REAL NOT NULL,
-                    WEIGHT REAL NOT NULL,
-                    BIOLOGICAL_GENDER CHAR NOT NULL,
-                    IMC REAL,
-                    BMR REAL,
-                    CLASSIFICATION TEXT
-                )
-            ''')
+from data.database import DB_PATH
 
 def register_patient(patient: Patient):
     with sq.connect(DB_PATH) as CONNECT:
@@ -50,7 +31,6 @@ def select_all_patients_simplificate():
         ''')
         return CURSOR.fetchall()
 
-
 def select_patient_by_id(id):
     with sq.connect(DB_PATH) as CONNECT:
         CURSOR = CONNECT.cursor()
@@ -66,5 +46,40 @@ def delete_patient(id):
            DELETE FROM PATIENTS WHERE id = ?
         ''', (id,))
 
+def update_patient_name(patient_id, new_name):
+    with sq.connect(DB_PATH) as CONNECT:
+        CURSOR = CONNECT.cursor()
+        CURSOR.execute(''' 
+            UPDATE PATIENTS SET NAME = ? WHERE ID = ?
+        ''', (new_name, patient_id))
 
 
+def update_patient_birthdate(patient_id, new_birthdate):
+    with sq.connect(DB_PATH) as CONNECT:
+        CURSOR = CONNECT.cursor()
+        CURSOR.execute(''' 
+            UPDATE PATIENTS SET BIRTHDATE = ? WHERE ID = ?
+        ''', (new_birthdate, patient_id))
+
+
+def update_patient_height(patient_id, new_height):
+    with sq.connect(DB_PATH) as CONNECT:
+        CURSOR = CONNECT.cursor()
+        CURSOR.execute(''' 
+            UPDATE PATIENTS SET HEIGHT = ? WHERE ID = ?
+        ''', (new_height, patient_id))
+
+
+def update_patient_weight(patient_id, new_weight):
+    with sq.connect(DB_PATH) as CONNECT:
+        CURSOR = CONNECT.cursor()
+        CURSOR.execute(''' 
+            UPDATE PATIENTS SET WEIGHT = ? WHERE ID = ?
+        ''', (new_weight, patient_id))
+
+def update_patient_biologic_gender(patient_id, new_biologic_gender):
+    with sq.connect(DB_PATH) as CONNECT:
+        CURSOR = CONNECT.cursor()
+        CURSOR.execute(''' 
+            UPDATE PATIENTS SET BIOLOGICAL_GENDER = ? WHERE ID = ?
+        ''', (new_biologic_gender, patient_id))
